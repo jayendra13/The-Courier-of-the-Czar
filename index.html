@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michael Strogoff — The Courier of the Czar</title>
+  <meta name="description" content="Follow Michael Strogoff's 5,500 km journey from Moscow to Irkutsk across Russia, brought to life on an interactive map.">
+</head>
+<body>
+  <div id="app">
+    <!-- Header with title and chapter nav -->
+    <header class="site-header">
+      <span class="site-header__title">Michael Strogoff</span>
+      <nav class="chapter-dots" aria-label="Chapter navigation"></nav>
+    </header>
+
+    <!-- Scrollytelling layout -->
+    <div class="scrolly">
+      <div class="scrolly__narrative"></div>
+      <div class="scrolly__graphic">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-bar">
+      <span class="progress-bar__label">Moscow</span>
+      <div class="progress-bar__track">
+        <div class="progress-bar__fill"></div>
+      </div>
+      <span class="progress-bar__label progress-bar__label--current">0 versts</span>
+      <span class="progress-bar__label">Irkutsk</span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

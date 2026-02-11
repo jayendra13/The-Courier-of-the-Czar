@@ -1,0 +1,202 @@
+/* ── Step Sections ── */
+.step {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: var(--space-lg);
+  padding-bottom: var(--space-2xl);
+  opacity: 0.35;
+  transition: opacity var(--transition-slow);
+}
+
+.step.is-active {
+  opacity: 1;
+}
+
+.step:first-child {
+  min-height: 100vh;
+  align-items: center;
+}
+
+.step:last-child {
+  min-height: 100vh;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  max-width: var(--card-max-width);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  transition: all var(--transition-medium);
+}
+
+.step.is-active .card {
+  background: var(--color-bg-card-hover);
+  border-color: rgba(139, 105, 20, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Card Label ── */
+.card__label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Card Title ── */
+.card__title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+/* Title card special styling */
+.step--title .card__title {
+  font-size: 2.4rem;
+  line-height: 1.15;
+}
+
+.step--title .card__subtitle {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-gold-bright);
+  margin-bottom: var(--space-md);
+}
+
+/* ── Card Meta ── */
+.card__meta {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.card__meta span {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* ── Divider ── */
+.card__divider {
+  border: none;
+  height: 1px;
+  background: var(--color-divider);
+  margin-bottom: var(--space-md);
+}
+
+/* ── Excerpt / Blockquote ── */
+.card__excerpt {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  border-left: 3px solid var(--color-gold);
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+/* ── Summary ── */
+.card__summary {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--color-text-dim);
+}
+
+/* ── Scroll Prompt (title card) ── */
+.scroll-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--space-xl);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: pulse-down 2s ease-in-out infinite;
+}
+
+.scroll-prompt__arrow {
+  font-size: 1.2rem;
+  margin-top: var(--space-xs);
+}
+
+@keyframes pulse-down {
+  0%, 100% { opacity: 0.5; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(4px); }
+}
+
+/* ── Conclusion Card ── */
+.step--conclusion .card {
+  text-align: center;
+}
+
+.card__stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  margin: var(--space-lg) 0;
+}
+
+.card__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card__stat-value {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.card__stat-label {
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: var(--space-xs);
+}
+
+/* ── Mobile ── */
+@media (max-width: 767px) {
+  .step {
+    min-height: 60vh;
+    padding: var(--space-md);
+  }
+
+  .card {
+    max-width: 100%;
+    padding: var(--space-md);
+  }
+
+  .card__title {
+    font-size: 1.25rem;
+  }
+
+  .step--title .card__title {
+    font-size: 1.8rem;
+  }
+
+  .card__excerpt {
+    font-size: 0.85rem;
+  }
+}

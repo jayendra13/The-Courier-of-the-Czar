@@ -1,0 +1,20 @@
+{
+  "name": "michael-strogoff-journey",
+  "version": "1.0.0",
+  "description": "Geospatial scrollytelling of Michael Strogoff's journey from Moscow to Irkutsk",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "extract": "node scripts/extract-chapters.js"
+  },
+  "dependencies": {
+    "@turf/turf": "^7.1.0",
+    "maplibre-gl": "^4.7.1",
+    "scrollama": "^3.2.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}
