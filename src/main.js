@@ -6,7 +6,7 @@ import './style/narrative.css';
 import { initMap } from './map.js';
 import { renderNarrative } from './narrative.js';
 import { initRoute } from './route.js';
-import { initScroll, onSection, scrollToSection } from './scroll.js';
+import { initScroll, onSection, scrollToSection, syncCurrentSection } from './scroll.js';
 import { initProgress } from './progress.js';
 import { sections } from './config.js';
 
@@ -28,6 +28,8 @@ async function main() {
   try {
     await initMap();
     initRoute();
+    // Map loaded after scroll init — sync map to wherever the user has scrolled
+    syncCurrentSection();
   } catch (e) {
     console.error('Map init error:', e);
   }

@@ -112,6 +112,7 @@ export function setFog(fog) {
 // ── Camera ──
 
 export function flyTo(camera) {
+  map.stop(); // cancel any in-progress animation to avoid state conflicts
   map.flyTo({
     center: camera.center,
     zoom: camera.zoom,

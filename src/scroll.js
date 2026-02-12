@@ -47,20 +47,21 @@ function handleStepEnter({ index }) {
   // Map operations — guard in case map isn't ready
   const map = getMap();
   if (map) {
+    // Set layer state before camera animation so terrain/elevation
+    // is resolved when flyTo calculates the camera path
     const ops = [
-      () => flyTo(section.camera),
       () => setTerrain(section.terrain),
       () => setFog(section.fog),
       () => setRiverVisibility(section.rivers || []),
       () => setRegionVisibility(section.regions || []),
       () => updateCityStates(section.distanceKm),
       () => updateRouteLine(section.distanceKm),
+      () => flyTo(section.camera),
     ];
     for (const op of ops) {
       try { op(); } catch (e) { console.warn('Map update error at section', index, e); }
     }
   }
-
   // Progress bar
   updateProgress(section.distanceKm);
 
@@ -100,4 +101,12 @@ export function scrollToSection(index) {
   if (steps[index]) {
     steps[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+}
+
+/**
+ * Re-trigger the map update for the current scroll section.
+ * Call after async map init to sync the map with where the user has scrolled.
+ */
+export function syncCurrentSection() {
+  handleStepEnter({ index: currentIndex });
 }
