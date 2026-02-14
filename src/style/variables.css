@@ -41,8 +41,12 @@
   --transition-medium: 0.4s ease;
   --transition-slow: 0.8s ease;
 
+  /* Satellite mode */
+  --color-sat-bg: #1a1a2e;
+
   /* Z-index */
   --z-map: 1;
+  --z-map-toggle: 5;
   --z-narrative: 10;
   --z-progress: 100;
   --z-nav: 200;

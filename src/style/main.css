@@ -214,6 +214,59 @@ body {
     width: 6px;
     height: 6px;
   }
+
+  .basemap-toggle {
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .basemap-toggle__option {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+}
+
+/* ── Basemap Toggle ── */
+.basemap-toggle {
+  position: absolute;
+  bottom: 28px;
+  right: 12px;
+  z-index: var(--z-map-toggle);
+  display: flex;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.basemap-toggle__option {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  padding: 4px 14px;
+  border: none;
+  border-radius: 17px;
+  background: transparent;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  line-height: 1.4;
+}
+
+.basemap-toggle__option:hover {
+  color: var(--color-text);
+}
+
+.basemap-toggle__option--active {
+  background: var(--color-gold);
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(139, 105, 20, 0.3);
+}
+
+.basemap-toggle__option--active:hover {
+  color: #fff;
 }
 
 /* ── Map Attribution ── */

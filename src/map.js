@@ -4,6 +4,7 @@ import routeData from './data/route.geojson.js';
 
 let map;
 let mapReady = false;
+let currentBaseMode = 'map';
 
 // Light map style using free CartoDB Voyager tiles (no API key needed)
 const MAP_STYLE = {
@@ -19,12 +20,27 @@ const MAP_STYLE = {
       attribution: '&copy; <a href="https://carto.com/">CARTO</a>, &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
       maxzoom: 18,
     },
+    'satellite-raster': {
+      type: 'raster',
+      tiles: [
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      ],
+      tileSize: 256,
+      attribution: 'Esri, Maxar, Earthstar Geographics',
+      maxzoom: 18,
+    },
   },
   layers: [
     {
       id: 'background',
       type: 'background',
       paint: { 'background-color': '#f4f1eb' },
+    },
+    {
+      id: 'satellite-tiles',
+      type: 'raster',
+      source: 'satellite-raster',
+      paint: { 'raster-opacity': 0 },
     },
     {
       id: 'osm-tiles',
@@ -100,13 +116,23 @@ export function setTerrain(enabled) {
 
 export function setFog(fog) {
   if (!fog) return;
-  map.setSky({
-    'sky-color': fog['sky-color'] || '#c8dce8',
-    'fog-color': fog.color || '#f4f1eb',
-    'fog-ground-blend': fog['horizon-blend'] || 0.08,
-    'horizon-fog-blend': fog['horizon-blend'] || 0.08,
-    'sky-horizon-blend': 0.5,
-  });
+  if (currentBaseMode === 'satellite') {
+    map.setSky({
+      'sky-color': '#0a0a1a',
+      'fog-color': '#1a1a2e',
+      'fog-ground-blend': fog['horizon-blend'] || 0.08,
+      'horizon-fog-blend': fog['horizon-blend'] || 0.08,
+      'sky-horizon-blend': 0.5,
+    });
+  } else {
+    map.setSky({
+      'sky-color': fog['sky-color'] || '#c8dce8',
+      'fog-color': fog.color || '#f4f1eb',
+      'fog-ground-blend': fog['horizon-blend'] || 0.08,
+      'horizon-fog-blend': fog['horizon-blend'] || 0.08,
+      'sky-horizon-blend': 0.5,
+    });
+  }
 }
 
 // ── Camera ──
@@ -407,4 +433,36 @@ export function setRegionVisibility(activeRegions) {
     map.setPaintProperty(`region-${key}-fill`, 'fill-opacity', opacity);
     map.setPaintProperty(`region-${key}-border`, 'line-opacity', opacity);
   });
+}
+
+// ── Base Layer Toggle ──
+
+export function getBaseMode() {
+  return currentBaseMode;
+}
+
+export function setBaseLayer(mode) {
+  if (mode === currentBaseMode) return;
+  currentBaseMode = mode;
+  const isSat = mode === 'satellite';
+
+  // Crossfade raster layers
+  map.setPaintProperty('satellite-tiles', 'raster-opacity', isSat ? 1 : 0);
+  map.setPaintProperty('osm-tiles', 'raster-opacity', isSat ? 0 : 1);
+
+  // Swap background color
+  map.setPaintProperty('background', 'background-color', isSat ? '#1a1a2e' : '#f4f1eb');
+
+  // Adjust city label halos and text colors for contrast
+  map.setPaintProperty('city-labels', 'text-halo-color',
+    isSat ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.85)');
+  map.setPaintProperty('city-labels', 'text-color', [
+    'match', ['get', 'state'],
+    'current', isSat ? '#ffd966' : '#1a1a2e',
+    'visited', isSat ? '#c8c8d0' : '#5a5a6e',
+    isSat ? '#a0a0b0' : '#8a8a9a',
+  ]);
+
+  // Adjust traveler dot stroke for contrast
+  map.setPaintProperty('traveler-dot', 'circle-stroke-color', isSat ? '#1a1a2e' : '#fff');
 }

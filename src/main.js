@@ -3,7 +3,7 @@ import './style/variables.css';
 import './style/main.css';
 import './style/narrative.css';
 
-import { initMap } from './map.js';
+import { initMap, setBaseLayer, getBaseMode } from './map.js';
 import { renderNarrative } from './narrative.js';
 import { initRoute } from './route.js';
 import { initScroll, onSection, scrollToSection, syncCurrentSection } from './scroll.js';
@@ -28,6 +28,7 @@ async function main() {
   try {
     await initMap();
     initRoute();
+    initBasemapToggle();
     // Map loaded after scroll init — sync map to wherever the user has scrolled
     syncCurrentSection();
   } catch (e) {
@@ -55,6 +56,21 @@ function initNav() {
       dot.classList.remove('active', 'visited');
       if (i === index) dot.classList.add('active');
       else if (i < index) dot.classList.add('visited');
+    });
+  });
+}
+
+function initBasemapToggle() {
+  const buttons = document.querySelectorAll('.basemap-toggle__option');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const mode = btn.dataset.mode;
+      if (mode === getBaseMode()) return;
+      buttons.forEach((b) => b.classList.remove('basemap-toggle__option--active'));
+      btn.classList.add('basemap-toggle__option--active');
+      setBaseLayer(mode);
+      // Restore section fog for the new mode
+      syncCurrentSection();
     });
   });
 }
