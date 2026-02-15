@@ -12,20 +12,35 @@ export function initRoute() {
   routeLine = turf.lineString(routeData.geometry.coordinates);
   routeLength = turf.length(routeLine, { units: 'kilometers' });
 
-  // Build milestones by computing cumulative geographic distance at each
-  // route point and pairing it with the city's story distance.
-  // Route coordinates and cities array are in the same order.
+  // Build milestones by snapping each city to its nearest route coordinate.
+  // This allows the route to have many more points than cities (e.g. detailed
+  // railway coordinates) while still mapping story distances correctly.
   const coords = routeData.geometry.coordinates;
-  let cumulativeGeo = 0;
-  for (let i = 0; i < coords.length; i++) {
-    if (i > 0) {
-      const from = turf.point(coords[i - 1]);
-      const to = turf.point(coords[i]);
-      cumulativeGeo += turf.distance(from, to, { units: 'kilometers' });
-    }
-    const storyKm = cities[i] ? cities[i].distanceKm : cumulativeGeo;
-    milestones.push({ storyKm, geoKm: cumulativeGeo });
+
+  // First, compute cumulative geographic distance at each route point
+  const geoDistances = [0];
+  for (let i = 1; i < coords.length; i++) {
+    const from = turf.point(coords[i - 1]);
+    const to = turf.point(coords[i]);
+    geoDistances.push(geoDistances[i - 1] + turf.distance(from, to, { units: 'kilometers' }));
   }
+
+  // For each city, find the closest route coordinate and record the mapping
+  for (const city of cities) {
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < coords.length; i++) {
+      const d = turf.distance(turf.point(coords[i]), turf.point(city.coords), { units: 'kilometers' });
+      if (d < bestDist) {
+        bestDist = d;
+        bestIdx = i;
+      }
+    }
+    milestones.push({ storyKm: city.distanceKm, geoKm: geoDistances[bestIdx] });
+  }
+
+  // Sort by story distance (should already be sorted, but ensure it)
+  milestones.sort((a, b) => a.storyKm - b.storyKm);
 }
 
 /**

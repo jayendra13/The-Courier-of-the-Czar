@@ -78,6 +78,7 @@ export function initMap() {
       addTravelerDot();
       addCityMarkers();
       addCityLabels();
+      addMapLabels();
       setFog({ color: '#f4f1eb', 'sky-color': '#c8dce8', 'horizon-blend': 0.08 });
       mapReady = true;
       resolve(map);
@@ -182,10 +183,10 @@ function addRouteLayer() {
     type: 'line',
     source: 'route',
     paint: {
-      'line-color': '#8b6914',
-      'line-width': 8,
-      'line-opacity': 0.15,
-      'line-blur': 8,
+      'line-color': '#d4a017',
+      'line-width': 10,
+      'line-opacity': 0.25,
+      'line-blur': 6,
     },
   });
 
@@ -195,9 +196,9 @@ function addRouteLayer() {
     type: 'line',
     source: 'route',
     paint: {
-      'line-color': '#8b6914',
-      'line-width': 3,
-      'line-opacity': 0.85,
+      'line-color': '#d4a017',
+      'line-width': 4,
+      'line-opacity': 1,
       'line-dasharray': [2, 1.5],
     },
   });
@@ -213,7 +214,7 @@ export function updateRouteData(geojson) {
 function addTravelerDot() {
   map.addSource('traveler', {
     type: 'geojson',
-    data: { type: 'Feature', geometry: { type: 'Point', coordinates: [37.62, 55.76] } },
+    data: { type: 'Feature', geometry: { type: 'Point', coordinates: [37.6177, 55.7510] } },
   });
 
   // Pulse ring
@@ -356,6 +357,50 @@ function addCityLabels() {
   });
 }
 
+// ── Map Labels (point annotations) ──
+
+function addMapLabels() {
+  map.addSource('map-labels', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: [] },
+  });
+
+  map.addLayer({
+    id: 'map-labels',
+    type: 'symbol',
+    source: 'map-labels',
+    layout: {
+      'text-field': ['get', 'text'],
+      'text-font': ['Open Sans Semibold'],
+      'text-size': 12,
+      'text-letter-spacing': 0.1,
+      'text-allow-overlap': true,
+    },
+    paint: {
+      'text-color': '#4a7a9a',
+      'text-halo-color': 'rgba(255, 255, 255, 0.8)',
+      'text-halo-width': 1.5,
+    },
+  });
+}
+
+export function setMapLabels(labels) {
+  const source = map.getSource('map-labels');
+  if (!source) return;
+  if (!labels || labels.length === 0) {
+    source.setData({ type: 'FeatureCollection', features: [] });
+    return;
+  }
+  source.setData({
+    type: 'FeatureCollection',
+    features: labels.map((l) => ({
+      type: 'Feature',
+      properties: { text: l.text },
+      geometry: { type: 'Point', coordinates: l.coords },
+    })),
+  });
+}
+
 // ── River Layers ──
 
 function addRiverLayers() {
@@ -379,13 +424,33 @@ function addRiverLayers() {
         'line-blur': 1,
       },
     });
+
+    map.addLayer({
+      id: `river-${key}-label`,
+      type: 'symbol',
+      source: `river-${key}`,
+      layout: {
+        'symbol-placement': 'line',
+        'text-field': river.name,
+        'text-font': ['Open Sans Semibold'],
+        'text-size': 11,
+        'text-letter-spacing': 0.15,
+      },
+      paint: {
+        'text-color': river.color,
+        'text-halo-color': 'rgba(255, 255, 255, 0.8)',
+        'text-halo-width': 1.5,
+        'text-opacity': 0,
+      },
+    });
   });
 }
 
 export function setRiverVisibility(activeRivers) {
   Object.keys(rivers).forEach((key) => {
-    const opacity = activeRivers.includes(key) ? 0.7 : 0;
-    map.setPaintProperty(`river-${key}`, 'line-opacity', opacity);
+    const active = activeRivers.includes(key);
+    map.setPaintProperty(`river-${key}`, 'line-opacity', active ? 0.7 : 0);
+    map.setPaintProperty(`river-${key}-label`, 'text-opacity', active ? 0.9 : 0);
   });
 }
 

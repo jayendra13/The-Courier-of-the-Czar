@@ -1,6 +1,6 @@
 import scrollama from 'scrollama';
 import { sections } from './config.js';
-import { getMap, flyTo, setTerrain, setFog, setRiverVisibility, setRegionVisibility, updateCityStates } from './map.js';
+import { getMap, flyTo, setTerrain, setFog, setRiverVisibility, setRegionVisibility, updateCityStates, setMapLabels } from './map.js';
 import { updateRouteLine } from './route.js';
 import { updateProgress } from './progress.js';
 
@@ -54,6 +54,7 @@ function handleStepEnter({ index }) {
       () => setFog(section.fog),
       () => setRiverVisibility(section.rivers || []),
       () => setRegionVisibility(section.regions || []),
+      () => setMapLabels(section.labels || []),
       () => updateCityStates(section.distanceKm),
       () => updateRouteLine(section.distanceKm),
       () => flyTo(section.camera),

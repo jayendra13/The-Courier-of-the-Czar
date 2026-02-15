@@ -7,8 +7,8 @@
 const TOTAL_DISTANCE_KM = 5500;
 
 export const cities = [
-  { name: 'Moscow', coords: [37.62, 55.76], distanceKm: 0 },
-  { name: 'Vladimir', coords: [40.99, 56.13], distanceKm: 190 },
+  { name: 'Moscow', coords: [37.6177, 55.7510], distanceKm: 0 },
+  { name: 'Vladimir', coords: [40.4202, 56.1304], distanceKm: 190 },
   { name: 'Nijni-Novgorod', coords: [43.94, 56.30], distanceKm: 440 },
   { name: 'Kazan', coords: [49.12, 55.79], distanceKm: 820 },
   { name: 'Perm', coords: [56.25, 58.01], distanceKm: 1400 },
@@ -49,11 +49,12 @@ export const sections = [
     meta: 'July 15 · Moscow · 0 versts',
     excerpt: '"Beneath his eyes, bathed in moonlight, lay a fortified inclosure, from which rose two cathedrals, three palaces, and an arsenal. This river was the Moskowa; the town Moscow; the fortified inclosure the Kremlin."',
     summary: 'The Czar hosts a grand ball at the Kremlin while learning that Tartar forces under Feofar-Khan have invaded Siberia and cut all telegraph lines beyond the Urals.',
-    camera: { center: [37.62, 55.76], zoom: 13, pitch: 30, bearing: -20, duration: 3000 },
+    camera: { center: [37.6177, 55.7510], zoom: 13, pitch: 30, bearing: -20, duration: 3000 },
     distanceKm: 0,
     terrain: false,
     fog: { color: '#e8e0d8', 'sky-color': '#b0a8c8', 'horizon-blend': 0.06, range: [1, 10] },
     rivers: [],
+    labels: [{ text: 'Moskva River', coords: [37.6350, 55.7440] }],
     regions: [],
   },
   {
@@ -64,7 +65,7 @@ export const sections = [
     meta: 'July 16 · Moscow · 0 versts',
     excerpt: '"If anyone could accomplish this journey from Moscow to Irkutsk, across a rebellious country, surmount obstacles, and brave perils of all sorts, Michael Strogoff was the man."',
     summary: 'Michael Strogoff, a captain of the Czar\'s couriers, accepts a perilous mission: carry a secret letter to the Grand Duke in Irkutsk, 5,200 versts away, through enemy-held territory.',
-    camera: { center: [37.62, 55.76], zoom: 10, pitch: 15, bearing: 30, duration: 3000 },
+    camera: { center: [37.6177, 55.7510], zoom: 10, pitch: 15, bearing: 30, duration: 3000 },
     distanceKm: 0,
     terrain: false,
     fog: { color: '#ede8e0', 'sky-color': '#c0b8d0', 'horizon-blend': 0.1, range: [1, 12] },
@@ -76,13 +77,28 @@ export const sections = [
     label: 'Book I, Chapter IV',
     title: 'From Moscow to Nijni-Novgorod',
     chapter: 'I.IV',
-    meta: 'July 17 · Vladimir · 440 versts',
-    excerpt: '"There would be no difficulty in getting over the first thousand miles. Railroads, post-carriages, steamboats, relays of horses, were at everyone\'s disposal."',
-    summary: 'Strogoff boards the train eastward, joining merchants, pilgrims, and — unknown to him — two correspondent journalists, Harry Blount and Alcide Jolivet, all headed for the great fair.',
-    camera: { center: [42.5, 56.2], zoom: 7.5, pitch: 10, bearing: 50, duration: 3000 },
-    distanceKm: 440,
+    meta: 'July 16 · Moscow Station · 0 versts',
+    excerpt: '"The train in which Michael took his place was to set him down at Nijni-Novgorod. It was a journey of under three hundred miles, and the train would accomplish it in ten hours."',
+    summary: 'Disguised as merchant Nicholas Korpanoff, Strogoff boards the morning train. His compartment fills with Persian traders, Jewish merchants, and Cossacks — all anxiously debating the Tartar invasion\'s effect on trade. Unknown to him, two rival journalists ride the same train: Alcide Jolivet of France and Harry Blount of the Daily Telegraph.',
+    camera: { center: [39.5, 56.0], zoom: 7.5, pitch: 10, bearing: 50, duration: 3000 },
+    distanceKm: 0,
     terrain: false,
     fog: { color: '#eaecf0', 'sky-color': '#a8c0d8', 'horizon-blend': 0.12, range: [1, 14] },
+    rivers: [],
+    regions: [],
+  },
+  {
+    id: 'vladimir-station',
+    label: 'Book I, Chapter IV',
+    title: 'The Station at Vladimir',
+    chapter: 'I.IV',
+    meta: 'July 17 · Vladimir · 190 versts',
+    excerpt: '"At the station of Wladimir fresh travelers joined the train. Among others, a young girl entered the compartment occupied by Michael Strogoff."',
+    summary: 'At this ancient capital of Russia, a young Livonian girl named Nadia quietly boards the train with nothing but a modest red leather bag. She takes the seat opposite Strogoff — a meeting that will change both their fates.',
+    camera: { center: [40.4202, 56.1304], zoom: 12, pitch: 20, bearing: -15, duration: 3000 },
+    distanceKm: 190,
+    terrain: false,
+    fog: { color: '#e8ecf0', 'sky-color': '#a0b8d0', 'horizon-blend': 0.12, range: [1, 14] },
     rivers: [],
     regions: [],
   },
@@ -98,7 +114,7 @@ export const sections = [
     distanceKm: 440,
     terrain: false,
     fog: { color: '#e8ecf0', 'sky-color': '#a0b8d0', 'horizon-blend': 0.15, range: [1, 14] },
-    rivers: ['volga'],
+    rivers: [],
     regions: [],
   },
   {
@@ -113,7 +129,7 @@ export const sections = [
     distanceKm: 600,
     terrain: false,
     fog: { color: '#e0e8f0', 'sky-color': '#98b8d8', 'horizon-blend': 0.2, range: [0.5, 10] },
-    rivers: ['volga'],
+    rivers: [],
     regions: [],
   },
   {
@@ -128,7 +144,7 @@ export const sections = [
     distanceKm: 820,
     terrain: false,
     fog: { color: '#f0e8e0', 'sky-color': '#d8c8a8', 'horizon-blend': 0.12, range: [1, 12] },
-    rivers: ['volga', 'kama'],
+    rivers: ['kama'],
     regions: [],
   },
   {
@@ -331,17 +347,6 @@ export const sections = [
 
 // Rivers as simplified GeoJSON LineStrings
 export const rivers = {
-  volga: {
-    name: 'Volga',
-    color: '#4a7a9a',
-    coordinates: [
-      [37.6, 55.8], [39.0, 56.3], [41.5, 56.7], [43.9, 56.3],
-      [46.0, 56.0], [48.5, 55.8], [49.1, 55.8], [49.5, 55.6],
-      [50.2, 55.2], [50.8, 54.8], [51.5, 54.3], [51.8, 53.8],
-      [52.0, 53.2], [51.8, 52.5], [50.5, 51.5], [49.0, 50.3],
-      [48.5, 49.2], [47.5, 48.5],
-    ],
-  },
   kama: {
     name: 'Kama',
     color: '#4a7a9a',

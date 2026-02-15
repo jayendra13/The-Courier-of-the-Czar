@@ -216,8 +216,8 @@ body {
   }
 
   .basemap-toggle {
-    bottom: 8px;
-    right: 8px;
+    top: 8px;
+    left: 8px;
   }
 
   .basemap-toggle__option {
@@ -229,8 +229,8 @@ body {
 /* ── Basemap Toggle ── */
 .basemap-toggle {
   position: absolute;
-  bottom: 28px;
-  right: 12px;
+  top: 12px;
+  left: 12px;
   z-index: var(--z-map-toggle);
   display: flex;
   background: rgba(255, 255, 255, 0.85);
