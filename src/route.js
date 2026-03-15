@@ -1,7 +1,7 @@
 import * as turf from '@turf/turf';
 import routeData from './data/route.geojson.js';
 import { updateRouteData, updateTravelerPosition } from './map.js';
-import { cities } from './config.js';
+import { cities } from './data/cities.js';
 
 let routeLine;
 let routeLength;

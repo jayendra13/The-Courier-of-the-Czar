@@ -6,23 +6,6 @@
 // Route distances (cumulative km from Moscow) for progressive line reveal
 const TOTAL_DISTANCE_KM = 5500;
 
-export const cities = [
-  { name: 'Moscow', coords: [37.6177, 55.7510], distanceKm: 0 },
-  { name: 'Vladimir', coords: [40.4202, 56.1304], distanceKm: 190 },
-  { name: 'Nijni-Novgorod', coords: [43.94, 56.30], distanceKm: 440 },
-  { name: 'Kazan', coords: [49.12, 55.79], distanceKm: 820 },
-  { name: 'Perm', coords: [56.25, 58.01], distanceKm: 1400 },
-  { name: 'Ekaterinburg', coords: [60.61, 56.84], distanceKm: 1800 },
-  { name: 'Tyumen', coords: [65.53, 57.15], distanceKm: 2150 },
-  { name: 'Ishim', coords: [69.60, 57.10], distanceKm: 2450 },
-  { name: 'Omsk', coords: [73.32, 54.99], distanceKm: 2800 },
-  { name: 'Kolyvan', coords: [78.00, 55.50], distanceKm: 3200 },
-  { name: 'Tomsk', coords: [84.97, 56.50], distanceKm: 3600 },
-  { name: 'Krasnoyarsk', coords: [92.89, 56.02], distanceKm: 4100 },
-  { name: 'Baikal', coords: [108.17, 53.56], distanceKm: 5100 },
-  { name: 'Irkutsk', coords: [104.31, 52.29], distanceKm: 5200 },
-];
-
 export const sections = [
   {
     id: 'overview',
@@ -344,88 +327,5 @@ export const sections = [
     isConclusion: true,
   },
 ];
-
-// Rivers as simplified GeoJSON LineStrings
-export const rivers = {
-  kama: {
-    name: 'Kama',
-    color: '#4a7a9a',
-    coordinates: [
-      [49.1, 55.8], [50.5, 56.5], [52.0, 57.0], [53.5, 57.5],
-      [55.0, 58.0], [56.2, 58.0], [57.0, 58.2], [58.0, 58.5],
-    ],
-  },
-  irtysh: {
-    name: 'Irtysh',
-    color: '#4a7a9a',
-    coordinates: [
-      [69.0, 50.5], [70.5, 52.0], [72.0, 53.5], [73.3, 55.0],
-      [73.5, 56.0], [73.0, 57.0], [72.5, 58.0], [71.0, 59.5],
-      [70.0, 60.5], [69.0, 61.5],
-    ],
-  },
-  ob: {
-    name: 'Ob',
-    color: '#4a7a9a',
-    coordinates: [
-      [82.0, 51.5], [82.5, 53.0], [83.0, 54.5], [82.5, 55.5],
-      [81.5, 56.5], [80.0, 57.5], [78.0, 59.0], [76.0, 60.5],
-      [73.5, 61.5], [71.0, 63.0], [69.0, 65.0], [68.0, 66.5],
-    ],
-  },
-  yenisei: {
-    name: 'Yenisei',
-    color: '#4a7a9a',
-    coordinates: [
-      [94.5, 50.5], [93.5, 52.5], [92.9, 56.0], [92.5, 58.0],
-      [91.0, 60.0], [89.5, 62.0], [87.5, 64.0], [86.0, 66.5],
-      [85.0, 68.0], [84.0, 70.0],
-    ],
-  },
-  angara: {
-    name: 'Angara',
-    color: '#4a7a9a',
-    coordinates: [
-      [108.0, 53.5], [107.0, 53.2], [106.0, 52.8],
-      [105.0, 52.5], [104.3, 52.3], [103.5, 52.5],
-      [102.0, 53.0], [100.0, 54.0], [98.0, 55.0],
-      [95.0, 56.0], [93.0, 56.0],
-    ],
-  },
-};
-
-// Region overlays as simplified polygons
-export const regions = {
-  urals: {
-    name: 'Ural Mountains',
-    color: 'rgba(100, 90, 70, 0.15)',
-    borderColor: 'rgba(100, 90, 70, 0.3)',
-    coordinates: [[
-      [56.0, 54.0], [58.0, 54.0], [62.0, 55.5], [63.0, 57.0],
-      [62.0, 59.0], [60.0, 61.0], [58.0, 63.0], [56.0, 65.0],
-      [54.0, 64.0], [55.0, 62.0], [56.0, 60.0], [57.0, 58.0],
-      [56.5, 56.0], [55.0, 55.0], [56.0, 54.0],
-    ]],
-  },
-  baraba: {
-    name: 'Baraba Steppe',
-    color: 'rgba(60, 80, 50, 0.2)',
-    borderColor: 'rgba(60, 80, 50, 0.35)',
-    coordinates: [[
-      [74.0, 54.0], [80.0, 54.0], [82.0, 55.0], [82.0, 56.5],
-      [80.0, 57.0], [76.0, 57.0], [74.0, 56.0], [74.0, 54.0],
-    ]],
-  },
-  baikal: {
-    name: 'Lake Baikal Region',
-    color: 'rgba(30, 60, 100, 0.15)',
-    borderColor: 'rgba(30, 60, 100, 0.3)',
-    coordinates: [[
-      [104.0, 51.5], [108.0, 51.5], [110.5, 52.5], [110.5, 54.5],
-      [108.0, 55.5], [106.0, 55.5], [104.0, 54.0], [103.5, 52.5],
-      [104.0, 51.5],
-    ]],
-  },
-};
 
 export { TOTAL_DISTANCE_KM };

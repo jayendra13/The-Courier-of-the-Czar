@@ -1,4 +1,5 @@
-import { cities, TOTAL_DISTANCE_KM } from './config.js';
+import { cities } from './data/cities.js';
+import { TOTAL_DISTANCE_KM } from './config.js';
 
 let fillEl;
 let labelEl;

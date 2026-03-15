@@ -1,0 +1,16 @@
+export const cities = [
+  { name: 'Moscow', coords: [37.6177, 55.7510], distanceKm: 0 },
+  { name: 'Vladimir', coords: [40.4202, 56.1304], distanceKm: 190 },
+  { name: 'Nijni-Novgorod', coords: [43.94, 56.30], distanceKm: 440 },
+  { name: 'Kazan', coords: [49.12, 55.79], distanceKm: 820 },
+  { name: 'Perm', coords: [56.25, 58.01], distanceKm: 1400 },
+  { name: 'Ekaterinburg', coords: [60.61, 56.84], distanceKm: 1800 },
+  { name: 'Tyumen', coords: [65.53, 57.15], distanceKm: 2150 },
+  { name: 'Ishim', coords: [69.60, 57.10], distanceKm: 2450 },
+  { name: 'Omsk', coords: [73.32, 54.99], distanceKm: 2800 },
+  { name: 'Kolyvan', coords: [78.00, 55.50], distanceKm: 3200 },
+  { name: 'Tomsk', coords: [84.97, 56.50], distanceKm: 3600 },
+  { name: 'Krasnoyarsk', coords: [92.89, 56.02], distanceKm: 4100 },
+  { name: 'Baikal', coords: [108.17, 53.56], distanceKm: 5100 },
+  { name: 'Irkutsk', coords: [104.31, 52.29], distanceKm: 5200 },
+];

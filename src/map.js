@@ -1,5 +1,7 @@
 import maplibregl from 'maplibre-gl';
-import { cities, rivers, regions } from './config.js';
+import { cities } from './data/cities.js';
+import { rivers } from './data/rivers.js';
+import { regions } from './data/regions.js';
 import routeData from './data/route.geojson.js';
 
 let map;
